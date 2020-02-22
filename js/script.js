@@ -177,8 +177,8 @@
     for (let article of articles) {
       const authorWrapper = article.querySelector(optArticleAuthorSelector);
       let html = '';
-      const dataAuthor = article.getAttribute('data-author');
-      const linkHTML = `<a href='#tag-${dataAuthor}'>${dataAuthor}</a>`;
+      const articleAuthor  = article.getAttribute('data-author');
+      const linkHTML = `<a href='#author-${articleAuthor}'>${articleAuthor}</a>`;
       html = html + linkHTML;
       authorWrapper.innerHTML = html;
     }
@@ -199,34 +199,34 @@
     const author = href.replace('#author-', '');
 
     /* find all authors with class active */
-    const activeAuthors = document.querySelectorAll('a.active[href^="#author-"]');
+    const activeAuthorLinks = document.querySelectorAll('a.active[href^="#author-"]');
 
     /* START LOOP: for each active author link */
-    for (let activeAuthor of activeAuthors) {
+    for (let activeAuthorLink of activeAuthorLinks) {
       /* remove class active */
-      activeAuthor.classList.remove('active');
+      activeAuthorLink.classList.remove('active');
     }
 
     /* find all author links with "href" attribute equal to the "href" constant */
-    const authorLinks = document.querySelectorAll('a[href^="author-' + author + '"]');
-    //('a.active[href="' + href + '"]');
-    // (`a[href="'${href}'"]`);
+    const sameAuthors = document.querySelectorAll('a[href="' + href + '"]');
 
     /* START LOOP: for each found author link */
-    for (let authorLink of authorLinks) {
+    for (let sameAuthor of sameAuthors) {
       /* add class active */
-      authorLink.classList.add('active');
+      sameAuthor.classList.add('active');
     }
     /* execute function "generateTitleLinks" with article selector as argument */
     generateTitleLinks('[data-author="' + author + '"]');
   }
 
+  /* [TA FUNKCJA JEST SPOKO]] */
   function addClickListenersToAuthors() {
-    const sameAuthors = document.querySelectorAll('a[href^="#tag-"]');
+    const sameAuthors = document.querySelectorAll('a[href^="#author-"]');
 
-    for (let author of sameAuthors) {
-      author.addEventListener('click', authorClickHandler);
+    for (let sameAuthor of sameAuthors) {
+      sameAuthor.addEventListener('click', authorClickHandler);
     }
   }
+
   addClickListenersToAuthors();
 }
